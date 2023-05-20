@@ -20,11 +20,10 @@ export const getPost = (req, res) => {
   const postId = req.params.postId;
 
   const q =
-    "SELECT p.id, username, title, desc, p.img, u.img AS userImg, p.cat, p.date FROM users u JOIN posts p on u.id = p.uid WHERE p.id = ?";
+    "SELECT p.id, username, title, content, p.img, u.img AS userImg, p.cat, p.date FROM users u JOIN posts p on u.id = p.uid WHERE p.id = ?";
 
   db.query(q, [postId], (error, data) => {
     if (error) return res.status(500).json({ error: 'An error occurred while fetching the post.' });
-
 
     return res.status(200).json(data[0]);
   });
@@ -59,6 +58,7 @@ export const addPost = (req, res) => {
     ];
 
     db.query(q, values, (error, _data) => {
+      console.log(error);
       if (error) return res.status(500).json(error);
       return res.json("Post has been created successfully");
     });
@@ -78,7 +78,6 @@ export const deletePost = (req, res) => {
 
     db.query(q, [postId, userInfo.id], (error, _data) => {
       if (error) return res.status(403).json("You can delete only your post!");
-
       return res.json("Post has been deleted successfully");
     });
   });
