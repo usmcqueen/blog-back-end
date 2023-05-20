@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
+const jwtSecret = process.env.JWT_SECRET; 
 // import Cookies from "universal-cookie";
-
 
 export const getPosts = (req, res) => {
   const q = req.query.cat
@@ -35,17 +35,16 @@ export const addPost = (req, res) => {
 
   if (!token) return res.status(401).json("Not authenticated!");
 
-  jwt.verify(token, "jwtkey", (error, userInfo) => {
-    if (error) return res.status(403).json("Token is not valid!");
-
+  jwt.verify(token, jwtSecret, (error, userInfo) => {
+    console.log(userInfo)
+    if (error) {
+      console.log(error)
+      return res.status(403).json("Token is not valid!");
+    }
+    
     // const postId = req.params.postId;
 
-    const q = "INSERT INTO posts (`title`, `content`, `img`, `cat`, `date`) VALUES (?, ?, ?, ?, ?, ?)";
-
-    // const q =
-    //   "INSERT INTO posts title, `desc`, img, cat, `date`, uid VALUES (?, ?, ?, ?, ?, ?)";
-
-      // "INSERT INTO posts,`title`, `desc`, `img`, `cat`, `date`, `uid` VALUES (?)";
+    const q = "INSERT INTO posts (`title`, `content`, `img`, `cat`, `date`, `uid`) VALUES (?)";
 
     const values = [
       req.body.title,
@@ -53,11 +52,10 @@ export const addPost = (req, res) => {
       req.body.img,
       req.body.cat,
       req.body.date,
-      // postId,
-      userInfo.id,
+      userInfo.username.id,
     ];
 
-    db.query(q, values, (error, _data) => {
+    db.query(q, [values], (error, _data) => {
       console.log(error);
       if (error) return res.status(500).json(error);
       return res.json("Post has been created successfully");
@@ -95,20 +93,15 @@ export const updatePost = (req, res) => {
     const q =
 
       "UPDATE posts SET title = ?, `desc` = ?, img = ?, cat = ? WHERE id = ? AND uid = ?";
-      // "UPDATE posts SET `title`= ?, `desc`= ?,`img`= ?,`cat`= ? WHERE `id`= ? AND `uid`= ?";
 
       const values = [req.body.title, req.body.desc, req.body.img, req.body.cat, postId, userInfo.id];
 
-    // const values = [req.body.title, req.body.desc, req.body.img, req.body.cat. postId, userInfo.id];
-
-    db.query(q, values, (error, _data) => {
-      if (error) return res.status(403).json(error)
-
-    // db.query(q, [...values, postId, userInfo.id], (error, _data) => {
-        // if (error) return res.status(403).json(error)
-  
-
-      return res.json("Post has been updated successfully");
+      // db.query(q, values, (error, _data) => {
+      // if (error) return res.status(403).json(error)
+      db.query(q, [...values, postId, userInfo.id], (error, data) => {
+        if (error) return res.status(403).json(error)
+        return res.json("Post has been updated successfully");
     });
+
   });
 };

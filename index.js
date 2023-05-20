@@ -8,17 +8,6 @@ import cookieParser from "cookie-parser";
 import multer from "multer";
 import cors from "cors";
 
-// const corsOptions = {
-//   origin: "*",
-//   credentials: true,
-//   exposedHeaders: ["access_token"]
-// }
-
-// const corsOptions = {
-//   origin: "http://127.0.0.1:3000", // Update with your client-side URL
-//   credentials: true,
-//   exposedHeaders: ["access_token"],
-// };
 const app = express();
 app.use(
   cors({
@@ -36,7 +25,7 @@ app.use(express.json());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/upload");
+    cb(null, "../client/public/uploads");
   },
   filename: function (req, file, cb) {
     cb(null, format(new Date(), "yyy-MM-dd HH:mm:ss") + file.originalname);

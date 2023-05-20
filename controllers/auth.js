@@ -7,9 +7,8 @@ dotenv.config(); // Load environment variables from .env file
 const saltRounds = 10;
 const jwtSecret = process.env.JWT_SECRET; 
 
-
 function generateAccessToken(username) {
-  return jwt.sign({ username }, jwtSecret, { expiresIn: "1hr" });
+  return jwt.sign({ username }, jwtSecret, { expiresIn: "30d" });
 }
 
 export const authenticateMiddleware = (req, res, next) => {
@@ -33,7 +32,6 @@ export const register = (req, res) => {
     if (data.length) return res.status(409).json("User already exists");
 
     // HASH THE PASSWORD AND CREATE A USER
-    // const bcrypt = require('bcryptjs');
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -73,7 +71,11 @@ export const login = (req, res) => {
       // console.log('bcrypt error', isPasswordCorrect)
       return res.status(400).json("Wrong username or password");
     }
-    const token = generateAccessToken({ id: data[0].id }, jwtSecret);
+    const token = generateAccessToken({ id: data[0].id }, jwtSecret, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 3600000
+    });
     console.log('Generated token:', token); 
 
     if (!token) {
