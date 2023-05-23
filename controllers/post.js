@@ -16,8 +16,8 @@ export const getPosts = (req, res) => {
 };
 
 export const getPost = (req, res) => {
-
-  const postId = req.params.postId;
+  
+  const postId = req.params.id;
 
   const q =
     "SELECT p.id, username, title, content, p.img, u.img AS userImg, p.cat, p.date FROM users u JOIN posts p on u.id = p.uid WHERE p.id = ?";

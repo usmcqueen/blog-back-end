@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
     cb(null, "../client/public/uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, format(new Date(), "yyy-MM-dd HH:mm:ss") + file.originalname);
+    cb(null, format(new Date(), "yyyy-MM-dd HH:mm:ss") + file.originalname);
   },
 });
 
