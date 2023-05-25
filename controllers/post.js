@@ -1,5 +1,7 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
+
+
 const jwtSecret = process.env.JWT_SECRET; 
 // import Cookies from "universal-cookie";
 
@@ -31,7 +33,8 @@ export const getPost = (req, res) => {
 
 export const addPost = (req, res) => {
   const token = req.cookies.access_token;
-  console.log('token:', token);
+  // console.log('token:', token);
+  // console.log('request:', req);
 
   if (!token) return res.status(401).json("Not authenticated!");
 
