@@ -74,7 +74,8 @@ export const login = (req, res) => {
     const token = generateAccessToken({ id: data[0].id }, jwtSecret, {
       httpOnly: true,
       secure: true,
-      maxAge: 3600000
+      // maxAge: 3600000
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     console.log('Generated token:', token); 
 

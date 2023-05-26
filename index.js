@@ -17,20 +17,19 @@ app.use(
   })
 );
 
-
 // app.use(cors({ origin: process.env.CLIENT_URL }));
 
 app.use(express.json());
 // const cookies = new Cookies();
 
-app.set('maxHttpHeaderSize', 65536); 
+// app.set('maxHttpHeaderSize', 65536); 
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public/uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
+    cb(null, Date.now() + '-' + file.originalname);
   },
 });
 
