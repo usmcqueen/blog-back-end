@@ -34,9 +34,12 @@ export const getPost = (req, res) => {
 export const addPost = (req, res) => {
   const token = req.cookies.access_token;
   // console.log('token:', token);
-  // console.log('request:', req);
+  console.log('request:', req.body);
 
-  if (!token) return res.status(401).json("Not authenticated!");
+  if (!token) {
+    console.log('not authenticated')
+    return res.status(401).json("Not authenticated!");
+  }
 
   jwt.verify(token, jwtSecret, (error, userInfo) => {
     console.log(userInfo)
@@ -93,6 +96,7 @@ export const deletePost = (req, res) => {
 };
 
 export const updatePost = (req, res) => {
+  console.log('hitting update', req.body)
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Not authorized.");
 
