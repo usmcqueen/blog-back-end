@@ -42,7 +42,7 @@ export const addPost = (req, res) => {
   }
 
   jwt.verify(token, jwtSecret, (error, userInfo) => {
-    console.log(userInfo)
+    // console.log('userInfo: ', userInfo)
     if (error) {
       console.log(error)
       return res.status(403).json("Token is not valid!");
@@ -62,11 +62,12 @@ export const addPost = (req, res) => {
     ];
 
     db.query(q, [values], (error, _data) => {
-      console.log(error);
+      console.log('sql error: ', error);
       if (error) return res.status(500).json(error);
       return res.json("Post has been created successfully");
     });
   });
+  console.log('add process completed')
 };
 
 export const deletePost = (req, res) => {
@@ -96,27 +97,35 @@ export const deletePost = (req, res) => {
 };
 
 export const updatePost = (req, res) => {
-  console.log('hitting update', req.body)
+  console.log('hitting update, data: ', req.body)
   const token = req.cookies.access_token;
-  if (!token) return res.status(401).json("Not authorized.");
+  if (!token) {
+    console.log('no token')
+    return res.status(401).json("Not authorized.");
+  }
 
   jwt.verify(token, jwtSecret, (err, userInfo) => {
-    if (err) return res.status(403).json("Token is invalid");
+    if (err) {
+      console.log('invalid token')
+      return res.status(403).json("Token is invalid");
+    }
 
-    const postId = req.params.postId;
-
+    const postId = req.params.id;
+    // console.log('uid: ', userInfo.username.id, 'id: ', postId)
     const q =
+      "UPDATE posts SET title = ?, content = ?, img = ?, cat = ? WHERE id = ? AND uid = ?";
 
-      "UPDATE posts SET title = ?, `desc` = ?, img = ?, cat = ? WHERE id = ? AND uid = ?";
-
-      const values = [req.body.title, req.body.desc, req.body.img, req.body.cat, postId, userInfo.id];
+      const values = [req.body.title, req.body.content, req.body.img, req.body.cat, postId, userInfo.username.id];
 
       // db.query(q, values, (error, _data) => {
       // if (error) return res.status(403).json(error)
       db.query(q, [...values, postId, userInfo.id], (error, data) => {
-        if (error) return res.status(403).json(error)
+        if (error) {
+          console.log('sql error')
+          return res.status(403).json(error)
+        }
         return res.json("Post has been updated successfully");
     });
-
+    console.log('put process completed')
   });
 };
