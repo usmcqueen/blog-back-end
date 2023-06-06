@@ -58,7 +58,7 @@ export const login = (req, res) => {
   db.query(q, [req.body.username], (error, data) => {
     // console.log(data)
     // console.log(error);
-    if (error) return res.status(500).json(error);
+    if (error) return res.status(500).json({error});
  
     if (data.length === 0) return res.status(404).json("User does not exist");
 
