@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js"
-  },
+},
   "keywords": [],
   "author": "pixiedust",
   "license": "ISC",
@@ -24,4 +24,5 @@
     "react-router-dom": "^6.11.0",
     "universal-cookie": "^4.0.4"
   }
+
 }

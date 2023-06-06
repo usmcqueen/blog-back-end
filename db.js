@@ -7,9 +7,9 @@ dotenv.config(); // Load environment variables from .env file
 // const accessToken = process.env.ACCESS_TOKEN; // Access the value of ACCESS_TOKEN from the environment
 
 export const db = createConnection({
- host: "127.0.0.1",
- user: "root",
- password: "root",
+ host: process.env.HOST,
+ user: process.env.USER,
+ password: process.env.PASSWORD,
  database: "blog",
 //  port: 3306,
 //  accessToken: accessToken,

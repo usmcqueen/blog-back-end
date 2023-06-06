@@ -6,8 +6,11 @@ import postRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import cors from "cors";
+// import Server from "mysql2/typings/mysql/lib/Server.js";
 
 const app = express();
+// const PORT = process.env.PORT || 8080;
+
 app.use(cookieParser());
 app.use(
   cors({
@@ -61,6 +64,8 @@ app.get("/test", (req, res) => {
 app.listen(8080, () => {
   console.log("Server started on port 8080");
 });
+
+// app.listen(PORT, () => console.log("Server started on port" + PORT));
 
 // app.listen(process.env.PORT || 8080, () => {
 //   console.log(`Server started on port ${process.env.PORT || 8080}`);
