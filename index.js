@@ -9,7 +9,7 @@ import cors from "cors";
 // import Server from "mysql2/typings/mysql/lib/Server.js";
 
 const app = express();
-// const PORT = process.env.PORT || 8080;
+
 
 app.use(cookieParser());
 app.use(
@@ -61,8 +61,10 @@ app.get("/test", (req, res) => {
   res.json("Ahoy, Matey!");
 });
 
-app.listen(8080, () => {
-  console.log("Server started on port 8080");
+const port = process.env.PORT || 5000
+
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server started on port ${port}`);
 });
 
 // app.listen(PORT, () => console.log("Server started on port" + PORT));

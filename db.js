@@ -10,7 +10,7 @@ export const db = createConnection({
  host: process.env.HOST,
  user: process.env.USER_NAME,
  password: process.env.PASSWORD,
-//  database: process.env.DATABASE,
+ database: process.env.DATABASE,
 //  port: 3306,
 //  accessToken: accessToken,
 });
