@@ -8,9 +8,9 @@ dotenv.config(); // Load environment variables from .env file
 
 export const db = createConnection({
  host: process.env.HOST,
- user: process.env.USER,
+ user: process.env.USER_NAME,
  password: process.env.PASSWORD,
- database: "blog",
+//  database: process.env.DATABASE,
 //  port: 3306,
 //  accessToken: accessToken,
 });
@@ -23,3 +23,4 @@ db.connect((error) => {
 export default db;
 
 
+// mysql://b3b243d994ac31:07f5c0bd@us-cdbr-east-06.cleardb.net/heroku_119e6bc2630d5d7?reconnect=true
