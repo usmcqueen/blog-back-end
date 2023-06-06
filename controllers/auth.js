@@ -23,7 +23,7 @@ export const authenticateMiddleware = (req, res, next) => {
 };
 
 export const register = (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
 
   // CHECK EXISTING USER
   const q = "SELECT * FROM users WHERE email = ? OR username = ?";
@@ -40,7 +40,7 @@ export const register = (req, res) => {
 
     db.query(q, [values], (error, data) => {
       if (error) {
-        // console.log('insert error ', error);
+        console.log('insert error ', error);
         return res.status(500).json(error);
       }
       console.log('insert result ', data)
