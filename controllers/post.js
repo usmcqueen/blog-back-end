@@ -11,7 +11,10 @@ export const getPosts = (req, res) => {
     : "SELECT * FROM posts";
 
   db.query(q, [req.query.cat], (error, data) => {
-    if (error) return res.status(500).json({ error: 'An error occurred while fetching the post.' });
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ error: 'An error occurred while fetching the post.' });
+    }
 
     return res.status(200).json(data);
   });

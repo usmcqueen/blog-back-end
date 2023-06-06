@@ -23,4 +23,3 @@ db.connect((error) => {
 export default db;
 
 
-// mysql://b3b243d994ac31:07f5c0bd@us-cdbr-east-06.cleardb.net/heroku_119e6bc2630d5d7?reconnect=true
