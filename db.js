@@ -15,14 +15,15 @@ const accessToken = process.env.ACCESS_TOKEN; // Access the value of ACCESS_TOKE
 const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER_NAME,
+  password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  waitForConnections: true,
-  connectionLimit: 10,
-  maxIdle: 10, 
-  idleTimeout: 60000, 
-  queueLimit: 0,
-  enableKeepAlive: true,
-  keepAliveInitialDelay: 0
+//   waitForConnections: true,
+//   connectionLimit: 10,
+//   maxIdle: 10, 
+//   idleTimeout: 60000, 
+//   queueLimit: 0,
+//   enableKeepAlive: true,
+//   keepAliveInitialDelay: 0
 });
 
 // pool.getConnection((error, _connection) => {
