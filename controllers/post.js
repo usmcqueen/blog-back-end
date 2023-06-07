@@ -1,4 +1,7 @@
 import { db } from "../db.js";
+
+// import mysql from "mysql2/promise";
+
 import jwt from "jsonwebtoken";
 
 
