@@ -7,9 +7,9 @@ import cookieParser from "cookie-parser";
 import multer from "multer";
 import cors from "cors";
 // import Server from "mysql2/typings/mysql/lib/Server.js";
-// import aws from "aws-sdk";
+import aws from "aws-sdk";
 
-import { SimpleFileUpload } from 'react-simple-file-upload';
+// import { SimpleFileUpload } from 'react-simple-file-upload';
 
 const app = express();
 
