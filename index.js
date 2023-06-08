@@ -8,6 +8,7 @@ import multer from "multer";
 import cors from "cors";
 // import Server from "mysql2/typings/mysql/lib/Server.js";
 import aws from "aws-sdk";
+import multers3 from "multer-s3"
 
 // import { SimpleFileUpload } from 'react-simple-file-upload';
 
@@ -47,7 +48,7 @@ aws.config.update({
 const s3 = new aws.S3();
 
 const upload = multer({
-  storage: multerS3({
+  storage: multers3({
     s3: s3,
     bucket: "cap-img", 
     acl: "public-read", // Set the appropriate ACL permissions for your use case
@@ -57,6 +58,16 @@ const upload = multer({
   }),
 });
 
+
+//use by upload form
+app.post('/api/upload', upload.array('upl', 25), function (req, res) {
+  res.send({
+      message: "Uploaded!",
+      urls: req.files.map(function(file) {
+          return {url: file.location, name: file.key, type: file.mimetype, size: file.size};
+      })
+  });
+});
 
 // const storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
