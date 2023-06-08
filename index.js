@@ -9,6 +9,8 @@ import cors from "cors";
 // import Server from "mysql2/typings/mysql/lib/Server.js";
 // import aws from "aws-sdk";
 
+import { SimpleFileUpload } from 'react-simple-file-upload';
+
 const app = express();
 
 
@@ -55,31 +57,41 @@ app.use(express.json());
 //   }),
 // });
 
+import { SimpleFileUpload } from 'react-simple-file-upload'
 
+  <SimpleFileUpload
+    apiKey="process.env.API_KEY"
+    onSuccess={handleFile}
+  />
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/public/uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
-});
-
-const upload = multer({ 
-  storage: storage 
-});
-
-app.post("/api/upload", upload.single("file"), function (req, res) {
-  try {
-    const file = req.file;
-    res.status(200).json(file.filename);
-    console.log("image uploaded successfully")
-  } catch (error) {
-    console.log(error)
+  function handleFile(url){
+    console.log('The URL of the file is ' + url)
   }
 
-});
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "../client/public/uploads");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + file.originalname);
+//   },
+// });
+
+// const upload = multer({ 
+//   storage: storage 
+// });
+
+// app.post("/api/upload", upload.single("file"), function (req, res) {
+//   try {
+//     const file = req.file;
+//     res.status(200).json(file.filename);
+//     console.log("image uploaded successfully")
+//   } catch (error) {
+//     console.log(error)
+//   }
+
+// });
 
 // app.use('/api', userRoutes);
 
