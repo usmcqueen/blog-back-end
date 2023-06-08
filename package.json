@@ -23,6 +23,7 @@
     "mysql2": "^3.2.4",
     "nodemon": "^2.0.22",
     "react-router-dom": "^6.11.0",
+    "simple-file-upload": "^0.7.0",
     "universal-cookie": "^4.0.4"
   }
 }

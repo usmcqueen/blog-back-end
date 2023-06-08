@@ -38,35 +38,24 @@ app.use(express.json());
 // const cookies = new Cookies();
 // app.set('maxHttpHeaderSize', 65536); 
 
-// aws.config.update({
-//   accessKeyId: process.env.ACCESS_KEY_ID,
-//   secretAccessKey: process.env.SECRET_ACCESS_KEY,
-//   region: process.env.REGION,
-// });
+aws.config.update({
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  region: process.env.REGION,
+});
 
-// const s3 = new aws.S3();
+const s3 = new aws.S3();
 
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: "cap-img", 
-//     acl: "public-read", // Set the appropriate ACL permissions for your use case
-//     key: function (req, file, cb) {
-//       cb(null, Date.now() + file.originalname);
-//     },
-//   }),
-// });
-
-import { SimpleFileUpload } from 'react-simple-file-upload'
-
-  <SimpleFileUpload
-    apiKey="process.env.API_KEY"
-    onSuccess={handleFile}
-  />
-
-  function handleFile(url){
-    console.log('The URL of the file is ' + url)
-  }
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "cap-img", 
+    acl: "public-read", // Set the appropriate ACL permissions for your use case
+    key: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname);
+    },
+  }),
+});
 
 
 // const storage = multer.diskStorage({
