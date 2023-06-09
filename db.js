@@ -17,13 +17,13 @@ const pool = mysql.createPool({
   user: process.env.USER_NAME,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-//   waitForConnections: true,
-//   connectionLimit: 10,
-//   maxIdle: 10, 
-//   idleTimeout: 60000, 
-//   queueLimit: 0,
-//   enableKeepAlive: true,
-//   keepAliveInitialDelay: 0
+  waitForConnections: true,
+  connectionLimit: 10,
+  maxIdle: 10, 
+  idleTimeout: 60000, 
+  queueLimit: 0,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0
 });
 
 // pool.getConnection((error, _connection) => {

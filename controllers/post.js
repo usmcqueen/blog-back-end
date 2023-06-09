@@ -1,9 +1,6 @@
 import db from "../db.js";
-
 // import mysql from "mysql2/promise";
-
 import jwt from "jsonwebtoken";
-
 
 const jwtSecret = process.env.JWT_SECRET; 
 // import Cookies from "universal-cookie";
@@ -121,11 +118,11 @@ export const updatePost = (req, res) => {
     const q =
       "UPDATE posts SET title = ?, content = ?, img = ?, cat = ? WHERE id = ? AND uid = ?";
 
-      const values = [req.body.title, req.body.content, req.body.img, req.body.cat, postId, userInfo.username.id];
+      const values = [req.body.title, req.body.content, req.body.img, req.body.cat, postId, userInfo.id];
 
       // db.query(q, values, (error, _data) => {
       // if (error) return res.status(403).json(error)
-      db.query(q, [...values, postId, userInfo.id], (error, data) => {
+      db.query(q, [...values, postId, userInfo.username.id], (error, data) => {
         if (error) {
           console.log('sql error')
           return res.status(403).json(error)
