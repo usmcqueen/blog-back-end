@@ -1,10 +1,14 @@
-// import { createConnection } from "mysql2";
 // import mysql from "mysql2/promise";
-import mysql from "mysql2"
+
+
+// import mysql from "mysql2"
+const mysql = require("mysql2");
+
+
+
 
 // const { createConnection } = require("mysql2");
 import dotenv from 'dotenv';
-
 dotenv.config(); 
 
 const accessToken = process.env.ACCESS_TOKEN; // Access the value of ACCESS_TOKEN from the environment
@@ -26,14 +30,17 @@ const pool = mysql.createPool({
   keepAliveInitialDelay: 0
 });
 
+
+ export default pool;
+
+
+
 // pool.getConnection((error, _connection) => {
 //     if (error)
 //     throw error;
 //     console.log('Database connected successfully');
 //     pool.releaseConnection(conn);
 //  })
-
- export default pool;
 
 
 // export const db = createConnection({

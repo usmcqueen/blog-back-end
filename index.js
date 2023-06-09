@@ -1,12 +1,14 @@
-import express from "express";
-import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
-import postRoutes from "./routes/posts.js";
-import cookieParser from "cookie-parser";
-import multer from "multer";
-import multerS3 from "multer-s3"
-import cors from "cors";
-import { S3Client } from '@aws-sdk/client-s3'
+const express = require("express");
+const authRoutes = require("./routes/auth.js");
+const userRoutes = require("./routes/users.js");
+const postRoutes = require("./routes/posts.js");
+const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const  cors = require("cors");
+const { S3Client } = require('@aws-sdk/client-s3');
+// const fs = require('fs');
+// const { uploadFile, getFileStream } = require('./s3')
 // import aws from "aws-sdk";
 
 
@@ -49,7 +51,7 @@ const s3 = new S3Client({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY,
   },
-  bucket: process.env.S3_BUCKET,
+  // bucket: process.env.S3_BUCKET,
 });
 
 const upload = multer({

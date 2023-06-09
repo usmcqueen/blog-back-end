@@ -1,7 +1,12 @@
-import db from "../db.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+const db = require('../db');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+// import db from "../db.js";
+// import bcrypt from "bcryptjs";
+// import jwt from "jsonwebtoken";
+// import dotenv from "dotenv";
 
 dotenv.config(); // Load environment variables from .env file
 const saltRounds = 10;

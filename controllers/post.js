@@ -1,11 +1,15 @@
-import db from "../db.js";
+const db = require('../db');
+const mysql = require('mysql2/promise');
+const jwt = require('jsonwebtoken');
+
+// import db from "../db.js";
 // import mysql from "mysql2/promise";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
 const jwtSecret = process.env.JWT_SECRET; 
 // import Cookies from "universal-cookie";
 
-export const getPosts = (req, res) => {
+const getPosts = (req, res) => {
   const q = req.query.cat
     ? "SELECT * FROM posts WHERE cat=?"
     : "SELECT * FROM posts";
@@ -20,7 +24,7 @@ export const getPosts = (req, res) => {
   });
 };
 
-export const getPost = (req, res) => {
+const getPost = (req, res) => {
   
   const postId = req.params.id;
 
@@ -34,7 +38,7 @@ export const getPost = (req, res) => {
   });
 };
 
-export const addPost = (req, res) => {
+const addPost = (req, res) => {
   const token = req.cookies.access_token;
   // console.log('token:', token);
   console.log('request:', req.body);
@@ -73,7 +77,7 @@ export const addPost = (req, res) => {
   console.log('add process completed')
 };
 
-export const deletePost = (req, res) => {
+const deletePost = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("NOT authenticated!");
 
@@ -99,7 +103,7 @@ export const deletePost = (req, res) => {
   });
 };
 
-export const updatePost = (req, res) => {
+const updatePost = (req, res) => {
 
   const token = req.cookies.access_token;
   if (!token) {
@@ -131,3 +135,11 @@ export const updatePost = (req, res) => {
     });
   });
 };
+
+module.exports = {
+  addPost,
+  getPost,
+  getPosts,
+  deletePost,
+  updatePost
+}
