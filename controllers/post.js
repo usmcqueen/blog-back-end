@@ -100,7 +100,7 @@ export const deletePost = (req, res) => {
 };
 
 export const updatePost = (req, res) => {
-  console.log('hitting update, data: ', req.body)
+
   const token = req.cookies.access_token;
   if (!token) {
     console.log('no token')
@@ -118,7 +118,7 @@ export const updatePost = (req, res) => {
     const q =
       "UPDATE posts SET title = ?, content = ?, img = ?, cat = ? WHERE id = ? AND uid = ?";
 
-      const values = [req.body.title, req.body.content, req.body.img, req.body.cat, postId, userInfo.id];
+      const values = [req.body.title, req.body.content, req.body.img, req.body.cat, postId, userInfo.username.id];
 
       // db.query(q, values, (error, _data) => {
       // if (error) return res.status(403).json(error)
@@ -129,6 +129,5 @@ export const updatePost = (req, res) => {
         }
         return res.json("Post has been updated successfully");
     });
-    console.log('put process completed')
   });
 };
