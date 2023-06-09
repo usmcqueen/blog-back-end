@@ -22,8 +22,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    // origin: "https://blog-capstone.herokuapp.com",
-    origin: "http://localhost:3000",
+    origin: "https://blog-capstone.herokuapp.com",
+    // origin: "http://localhost:3000",
     credentials: true,
     exposedHeaders: ["access_token"],
   })
