@@ -56,7 +56,7 @@ const register = (req, res) => {
 };
 
 const login = (req, res) => {
-  console.log('server login request', req.body)
+  
   // CHECK USER
   const q = `SELECT * FROM users WHERE username = ?`;
 
@@ -82,7 +82,7 @@ const login = (req, res) => {
       // maxAge: 3600000
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    console.log('Generated token:', token); 
+    
 
     if (!token) {
       return res.status(500).json('Failed to generate access token'); 
