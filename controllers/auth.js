@@ -111,3 +111,9 @@ const logout = (req, res) => {
     .status(200)
     .json("User is currently logged out");
 };
+
+module.exports = {
+  login,
+  register,
+  logout
+}

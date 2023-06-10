@@ -8,7 +8,7 @@ const mysql = require("mysql2");
 
 
 // const { createConnection } = require("mysql2");
-const db = require('../db');
+const dotenv = require("dotenv");
 // import dotenv from 'dotenv';
 dotenv.config(); 
 
@@ -31,8 +31,8 @@ const pool = mysql.createPool({
   keepAliveInitialDelay: 0
 });
 
-
- export default pool;
+module.exports = pool
+//  export default pool;
 
 
 
