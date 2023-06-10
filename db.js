@@ -8,7 +8,8 @@ const mysql = require("mysql2");
 
 
 // const { createConnection } = require("mysql2");
-import dotenv from 'dotenv';
+const db = require('../db');
+// import dotenv from 'dotenv';
 dotenv.config(); 
 
 const accessToken = process.env.ACCESS_TOKEN; // Access the value of ACCESS_TOKEN from the environment
