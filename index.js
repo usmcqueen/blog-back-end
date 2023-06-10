@@ -9,14 +9,9 @@ const multerS3 = require("multer-s3");
 const cors = require("cors");
 const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner')
-// const fs = require('fs');
-// const { uploadFile, getFileStream } = require('./s3')
-// import aws from "aws-sdk";
 
 
 const app = express();
-
-
 
 app.use(cookieParser());
 
@@ -59,16 +54,7 @@ const s3Client = new S3Client({
 });
 
 const bucket = process.env.S3_BUCKET;
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: Bucket,
-//     acl: "public-read-write", 
-//     key: function (req, file, cb) {
-//       cb(null, Date.now() + file.originalname);
-//     },
-//   }),
-// });
+
 const generateFilename = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 
 const storage = multer.memoryStorage()
