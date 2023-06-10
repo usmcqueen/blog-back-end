@@ -16,7 +16,7 @@ function generateAccessToken(username) {
   return jwt.sign({ username }, jwtSecret, { expiresIn: "30d" });
 }
 
-export const authenticateMiddleware = (req, res, next) => {
+const authenticateMiddleware = (req, res, next) => {
   const accessToken = req.cookies.access_token;
   
   try {
@@ -27,7 +27,7 @@ export const authenticateMiddleware = (req, res, next) => {
   }
 };
 
-export const register = (req, res) => {
+const register = (req, res) => {
   console.log(req.body);
 
   // CHECK EXISTING USER
@@ -55,7 +55,7 @@ export const register = (req, res) => {
 
 };
 
-export const login = (req, res) => {
+const login = (req, res) => {
   console.log('server login request', req.body)
   // CHECK USER
   const q = `SELECT * FROM users WHERE username = ?`;
@@ -102,7 +102,7 @@ export const login = (req, res) => {
   });
 };
 
-export const logout = (req, res) => {
+const logout = (req, res) => {
   res
     .clearCookie("access_token", {
       sameSite: "none",
